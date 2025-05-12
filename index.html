@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Honey!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('your-background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 2.8em;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1.2em;
+      background-color: #ff66b2;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .message-box {
+      margin-top: 30px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 800px;
+      display: none;
+    }
+
+    .line {
+      display: none;
+      margin: 10px 0;
+      font-size: 1.1em;
+    }
+
+    .collage {
+      margin-top: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .collage img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    @media (max-width: 768px) {
+      .collage img {
+        width: 90%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Happy Birthday Honey 🎉</h1>
+  <button onclick="showMessage()">Click to Reveal</button>
+
+  <div class="message-box" id="messageBox">
+    <!-- lines will appear here -->
+    <div class="line">I don’t know why I’m even doing this, but here it is—a special happy birthday from a stranger you’ve never met in person, yet someone who once felt a deep connection with you.</div>
+    <div class="line">I still don’t know why we stopped talking, but those memories... they were something special.</div>
+    <div class="line">I don’t usually message anyone first, but that day—20th October at 7:36 p.m.—was different. It meant something to me.</div>
+    <div class="line">When I got your reply, it honestly felt like a mini heart attack—in the best way possible.</div>
+    <div class="line">I’ve always felt unlucky in life. I don’t normally put in effort for anyone, nor do I try to. But for some reason, I did for you.</div>
+    <div class="line">I don’t even care much about others, yet with you, it was different.</div>
+    <div class="line">Maybe this is pointless, maybe not—but if somehow you recognize me through this message, that alone would mean a lot.</div>
+    <div class="line">Your favorite word, the one I still remember: "BAs".</div>
+    <div class="line">Happy Birthday to you! 🎂 Enjoy your day to the fullest—with joy and happiness.</div>
+    <div class="line">And lastly... I wish we could talk again like we used to.</div>
+    <div class="line">I don’t know what misunderstanding created the distance between us, but if there’s a chance to clear it up, I’d be truly grateful.</div>
+    <div class="line">It might not mean much to you, but to me—it means a lot. Just have a beautiful day. You deserve it.</div>
+  </div>
+
+  <div class="collage">
+    <img src="img1.jpg" alt="Honey 1" />
+    <img src="img2.jpg" alt="Honey 2" />
+    <img src="img3.jpg" alt="Honey 3" />
+  </div>
+
+  <script>
+    function showMessage() {
+      document.getElementById('messageBox').style.display = 'block';
+      const lines = document.querySelectorAll('.line');
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < lines.length) {
+          lines[i].style.display = 'block';
+          i++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 1200); // 1.2 sec between lines
+    }
+  </script>
+
+</body>
+</html>
