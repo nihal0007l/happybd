@@ -8,75 +8,153 @@
     body {
       margin: 0;
       padding: 0;
-      background: url('your-background.jpg') no-repeat center center fixed;
+      background: url('background.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Segoe UI', sans-serif;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Gradient overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8));
+      z-index: -1;
     }
 
     h1 {
-      margin-top: 40px;
+      text-align: center;
+      color: #fff;
       font-size: 2.8em;
-      text-shadow: 2px 2px 5px black;
+      margin-top: 40px;
+      text-shadow: 2px 2px 8px black;
     }
 
-    button {
-      margin-top: 20px;
-      padding: 12px 24px;
-      font-size: 1.2em;
-      background-color: #ff66b2;
-      border: none;
-      border-radius: 8px;
+    .envelope-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .envelope {
+      width: 200px;
+      height: 120px;
+      background: #ffb6c1;
+      position: relative;
       cursor: pointer;
-      transition: 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
     }
 
-    button:hover {
+    .envelope:hover {
       transform: scale(1.05);
     }
 
-    .message-box {
-      margin-top: 30px;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 25px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 800px;
-      display: none;
+    .envelope:before, .envelope:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
     }
 
-    .line {
+    .envelope:before {
+      top: 0;
+      left: 0;
+      border-width: 60px 100px 0 100px;
+      border-color: #ff69b4 transparent transparent transparent;
+    }
+
+    .message-box {
       display: none;
-      margin: 10px 0;
-      font-size: 1.1em;
+      text-align: center;
+      margin: 30px 20px;
+      color: white;
+      font-size: 1.2em;
+      line-height: 1.6;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .collage {
-      margin-top: 40px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 15px;
+      margin: 30px 20px;
     }
 
     .collage img {
-      width: 250px;
-      height: 250px;
-      object-fit: cover;
+      width: 200px;
+      height: auto;
       border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      box-shadow: 0 0 10px rgba(255,255,255,0.4);
+      transition: transform 0.3s;
     }
 
-    @media (max-width: 768px) {
-      .collage img {
-        width: 90%;
-        height: auto;
+    .collage img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Animated text reveal */
+    .line {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: reveal 0.7s ease forwards;
+    }
+
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Falling hearts */
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: fall 6s linear infinite;
+      top: -10%;
+      z-index: 0;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10%) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(120vh) rotate(45deg);
+        opacity: 0;
       }
     }
   </style>
@@ -84,45 +162,61 @@
 <body>
 
   <h1>Happy Birthday Honey 🎉</h1>
-  <button onclick="showMessage()">Click to Reveal</button>
+
+  <div class="envelope-container">
+    <div class="envelope" onclick="showMessage()"></div>
+  </div>
 
   <div class="message-box" id="messageBox">
-    <!-- lines will appear here -->
-    <div class="line">I don’t know why I’m even doing this, but here it is—a special happy birthday from a stranger you’ve never met in person, yet someone who once felt a deep connection with you.</div>
-    <div class="line">I still don’t know why we stopped talking, but those memories... they were something special.</div>
-    <div class="line">I don’t usually message anyone first, but that day—20th October at 7:36 p.m.—was different. It meant something to me.</div>
-    <div class="line">When I got your reply, it honestly felt like a mini heart attack—in the best way possible.</div>
-    <div class="line">I’ve always felt unlucky in life. I don’t normally put in effort for anyone, nor do I try to. But for some reason, I did for you.</div>
-    <div class="line">I don’t even care much about others, yet with you, it was different.</div>
-    <div class="line">Maybe this is pointless, maybe not—but if somehow you recognize me through this message, that alone would mean a lot.</div>
-    <div class="line">Your favorite word, the one I still remember: "BAs".</div>
-    <div class="line">Happy Birthday to you! 🎂 Enjoy your day to the fullest—with joy and happiness.</div>
-    <div class="line">And lastly... I wish we could talk again like we used to.</div>
-    <div class="line">I don’t know what misunderstanding created the distance between us, but if there’s a chance to clear it up, I’d be truly grateful.</div>
-    <div class="line">It might not mean much to you, but to me—it means a lot. Just have a beautiful day. You deserve it.</div>
+    <p class="line" style="animation-delay: 0s;">I don’t know why I’m even doing this, but here it is —</p>
+    <p class="line" style="animation-delay: 0.5s;">A special happy birthday from a stranger you’ve never met,</p>
+    <p class="line" style="animation-delay: 1s;">Yet someone who once felt a deep connection with you.</p>
+    <p class="line" style="animation-delay: 1.5s;">I still don’t know why we stopped talking, but those memories…</p>
+    <p class="line" style="animation-delay: 2s;">They were something special.</p>
+    <p class="line" style="animation-delay: 2.5s;">That day — 20th October, 7:36 p.m. — I remember it so well.</p>
+    <p class="line" style="animation-delay: 3s;">When your reply came, it felt like a mini heart attack—in a good way.</p>
+    <p class="line" style="animation-delay: 3.5s;">I’m not someone who puts effort in people…</p>
+    <p class="line" style="animation-delay: 4s;">But for you, I did. And it meant something.</p>
+    <p class="line" style="animation-delay: 4.5s;">If somehow you recognize me, that alone would mean a lot.</p>
+    <p class="line" style="animation-delay: 5s;">Your favorite word? I still remember: “BAs”.</p>
+    <p class="line" style="animation-delay: 5.5s;">Happy Birthday to you 🎂</p>
+    <p class="line" style="animation-delay: 6s;">Enjoy your day with joy and happiness.</p>
+    <p class="line" style="animation-delay: 6.5s;">Maybe we could talk again… maybe.</p>
+    <p class="line" style="animation-delay: 7s;">Just know — this message means a lot to me.</p>
+    <p class="line" style="animation-delay: 7.5s;">You deserve a beautiful day 💖</p>
   </div>
 
   <div class="collage">
-    <img src="img1.jpg" alt="Honey 1" />
-    <img src="img2.jpg" alt="Honey 2" />
-    <img src="img3.jpg" alt="Honey 3" />
+    <img src="photo1.jpg" alt="Honey 1" />
+    <img src="photo2.jpg" alt="Honey 2" />
+    <img src="photo3.jpg" alt="Honey 3" />
   </div>
 
   <script>
     function showMessage() {
-      document.getElementById('messageBox').style.display = 'block';
+      const box = document.getElementById("messageBox");
+      box.style.display = "block";
       const lines = document.querySelectorAll('.line');
-      let i = 0;
-      const interval = setInterval(() => {
-        if (i < lines.length) {
-          lines[i].style.display = 'block';
-          i++;
-        } else {
-          clearInterval(interval);
-        }
-      }, 1200); // 1.2 sec between lines
+      lines.forEach((line, i) => {
+        line.style.animation = `reveal 0.7s ease forwards`;
+        line.style.animationDelay = line.style.animationDelay || `${i * 0.3}s`;
+      });
+
+      // Generate hearts
+      for (let i = 0; i < 25; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 6000);
+      }
     }
   </script>
 
 </body>
 </html>
+
